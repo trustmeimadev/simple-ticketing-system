@@ -59,7 +59,7 @@ export default function SignUpPage() {
             <div className="w-full max-w-md">
                 <div className="flex flex-col gap-6">
                     <div className="text-center">
-                        <h1 className="text-3xl font-bold text-foreground">DOLE Work Tracker</h1>
+                        <h1 className="text-3xl font-bold text-foreground">Personal Tracker</h1>
                         <p className="text-muted-foreground mt-2">Create your account</p>
                     </div>
 

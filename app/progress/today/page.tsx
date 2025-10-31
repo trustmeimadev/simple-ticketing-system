@@ -12,7 +12,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { useState, useEffect } from "react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import type { User, Profile, DailyProgress } from "@/types"
+import type { User, DailyProgress } from "@/types"
 
 
 
@@ -22,7 +22,7 @@ export default function LogProgressPage() {
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
     const [user, setUser] = useState<User | null>(null)
-    const [profile, setProfile] = useState<Profile | null>(null)
+    // const [profile, setProfile] = useState<Profile | null>(null)
     const [existingEntry, setExistingEntry] = useState<DailyProgress | null>(null)
     const today = new Date().toISOString().split("T")[0]
     const [formData, setFormData] = useState({
@@ -41,7 +41,7 @@ export default function LogProgressPage() {
             if (!user) {
                 redirect("/auth/login")
             }
-            setUser(user)
+            setUser(user as User)
 
             // const { data: profileData } = await supabase.from("profiles").select("*").eq("id", user.id).single()
             // setProfile(profileData)

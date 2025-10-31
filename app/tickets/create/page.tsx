@@ -4,7 +4,7 @@ import type React from "react"
 
 import { redirect, useRouter } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
-import { NavHeader } from "@/components/nav-header"
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -12,7 +12,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { useState, useEffect } from "react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import type { User, Profile } from "@/types"
+import type { User } from "@/types"
 
 export default function CreateTicketPage() {
     const router = useRouter()
@@ -20,29 +20,13 @@ export default function CreateTicketPage() {
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
     const [user, setUser] = useState<User | null>(null)
-    const [profile, setProfile] = useState<Profile | null>(null)
+    // const [profile, setProfile] = useState<Profile | null>(null)
     const [formData, setFormData] = useState({
         title: "",
         description: "",
         priority: "medium",
     })
 
-    useEffect(() => {
-        const fetchUser = async () => {
-            const {
-                data: { user },
-            } = await supabase.auth.getUser()
-            if (!user) {
-                redirect("/auth/login")
-            }
-            setUser(user)
-
-            const { data: profileData } = await supabase.from("profiles").select("*").eq("id", user.id).single()
-            setProfile(profileData)
-        }
-
-        fetchUser()
-    }, [])
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -76,9 +60,6 @@ export default function CreateTicketPage() {
 
     return (
         <div className="min-h-screen bg-background">
-            <NavHeader
-                userName={profile?.first_name ? `${profile.first_name} ${profile.last_name}` : user?.email || "User"}
-            />
 
             <div className="max-w-2xl mx-auto px-6 py-8">
                 <div className="mb-8">

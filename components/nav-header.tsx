@@ -28,7 +28,7 @@ export function NavHeader({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (
             if (profile) {
                 setUserName(`${profile.first_name} ${profile.last_name}`)
             } else {
-                setUserName(user.email)
+                setUserName(user.email ?? null)
             }
         }
 

@@ -1,9 +1,10 @@
 "use client"
+
 import { useSearchParams } from "next/navigation"
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { Button } from "@/components/ui/button"
 
-export default function PomodoroPage() {
+function PomodoroPageContent() {
     const searchParams = useSearchParams()
     const ticketNumber = searchParams.get("ticketNumber")
 
@@ -130,5 +131,13 @@ export default function PomodoroPage() {
                 </div>
             </div>
         </div>
+    )
+}
+
+export default function PomodoroPage() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <PomodoroPageContent />
+        </Suspense>
     )
 }
